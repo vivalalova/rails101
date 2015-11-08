@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   # before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :find_group
   before_action :authenticate_user!  
+  before_action :member_required, only: [:new, :create ]
   # GET /posts
   # GET /posts.json
   def index
@@ -75,5 +76,12 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:content, :group_id)
+    end
+
+    def member_required
+      if !current_user.is_member_of?(@group)
+        flash[:warning] = "你不是這個討論版的成員，不能發文喔！"
+        redirect_to group_path(@group)
+      end
     end
 end
