@@ -19,7 +19,7 @@
 
           <td> <%= post.content %> </td> 
           <td> <%= post.group.title %> </td> 
-          <td> <%= post.updated_at %> </td> 
+          <td> <%= post.updated_at.to_s(:short) %> </td> 
         </tr>
       <% end %>
     </tbody>
