@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
 
-      @post = @group.posts.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   # POST /posts
@@ -30,6 +30,7 @@ class PostsController < ApplicationController
   def create
 
    @post = @group.posts.build(post_params)
+   @post.author = current_user
 
    if @post.save
      redirect_to group_path(@group), notice: "新增文章成功！"
@@ -42,7 +43,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
 
-   @post = @group.posts.find(params[:id])
+   @post = current_user.posts.find(params[:id])
 
    if @post.update(post_params)
      redirect_to group_path(@group), notice: "文章修改成功！"
@@ -55,7 +56,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
 
-   @post = @group.posts.find(params[:id])
+   @post = current_user.posts.find(params[:id])
 
    @post.destroy
    redirect_to group_path(@group), alert: "文章已刪除"

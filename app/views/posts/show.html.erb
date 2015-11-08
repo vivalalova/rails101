@@ -10,5 +10,9 @@
   <%= @post.group_id %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if post.editable_by?(current_user) %>
+	<%= link_to("Edit", edit_group_post_path(post.group, post), class: "btn btn-default btn-xs")%>
+	<%= link_to("Delete", group_post_path(post.group, post), class: "btn btn-default btn-xs ", method: :delete, data: { confirm: "Are you sure?" } )%>
+<% end %>
+
 <%= link_to 'Back', posts_path %>
