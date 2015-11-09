@@ -3,6 +3,7 @@ ruby "2.2.1"
 gem 'bootstrap-sass'
 gem "simple_form"
 gem "devise"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 gem 'rails', '4.2.4'
